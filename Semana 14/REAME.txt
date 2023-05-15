@@ -16,3 +16,6 @@ cuado se elimina un nodo que no es hoja, no se evalua como "none", porque se cor
 sentido: izquierda >  fullderecha 
 
 /note
+
+
+-prueba de comiteo
