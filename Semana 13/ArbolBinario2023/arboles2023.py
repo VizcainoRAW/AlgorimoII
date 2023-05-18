@@ -82,4 +82,10 @@ class ArbolBinario:
                 if i.hijo_izquierdo == None and i.hijo_derecho == None:
                     lista_hojas.append(i)
         return lista_hojas
+    
+    def contarNodos(self):
+        lista_nodos=self.preOrden()
+        numero_nodos=len(lista_nodos)
+        return numero_nodos
+        
 
