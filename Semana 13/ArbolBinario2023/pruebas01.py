@@ -19,4 +19,5 @@ nodo03.hijo_izquierdo = nodo06
 print("Arbol:\n",raiz.verArbol())
 print("Hoja del arbol: ",raiz,"\n",raiz.listarHojas())
 print("Numero de nodos del arbol: ",raiz.contarNodos())
+print("Altura del arbol: ",raiz.determinarAltura())
 

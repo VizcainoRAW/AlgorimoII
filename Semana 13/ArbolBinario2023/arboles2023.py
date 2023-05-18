@@ -87,5 +87,19 @@ class ArbolBinario:
         lista_nodos=self.preOrden()
         numero_nodos=len(lista_nodos)
         return numero_nodos
-        
-
+    
+    def determinarAltura(self,altura=None):
+         nodos=list()
+         lista_prfundidad=list()
+         self.__determinarAltura(self, lista_prfundidad,nodos)
+         return max(lista_prfundidad)
+    
+    def __determinarAltura(self, arbol:"ArbolBinario", profundida:list, nodos:list ,nivel = 0):
+        if arbol is not None:
+            nodos.append(arbol)
+            profundida.append(nivel)
+            nodos, profundidad= self.__determinarAltura(arbol.hijo_izquierdo, profundida,nodos, nivel +1)
+            nodos, profundidad= self.__determinarAltura(arbol.hijo_derecho, profundida,nodos, nivel +1)
+        return nodos, profundida
+    
+    
