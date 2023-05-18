@@ -17,4 +17,6 @@ nodo03.hijo_izquierdo = nodo06
 
 #Visualización
 print("Arbol:\n",raiz.verArbol())
-print("Arbol:\n",nodo02.preOrden())
+#print("Arbol:\n",nodo02.preOrden())
+print(raiz.listarHojas())
+

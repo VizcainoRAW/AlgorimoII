@@ -69,4 +69,17 @@ class ArbolBinario:
             visitados = self.__posOrden(arbol.hijo_derecho, visitados)
             visitados.append(arbol)
         return visitados
+    #listar hojas  
+    def listarHojas(self):
+        lista_visitados= self.preOrden()
+        lista_hojas = self.__listarHojas(self, lista_visitados)
+        return lista_hojas
+    
+    def __listarHojas(self, arbol:"ArbolBinario", visitados:list):
+        if arbol is not None:
+            lista_hojas=list()
+            for i in visitados:
+                if i.hijo_izquierdo == None and i.hijo_derecho == None:
+                    lista_hojas.append(i)
+        return lista_hojas
 
