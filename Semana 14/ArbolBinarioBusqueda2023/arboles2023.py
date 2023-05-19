@@ -196,3 +196,28 @@ class ArbolBinarioBusqueda:
             elif nodo_temporal.hijo_derecho == nodo_izquierdo:
                 nodo_temporal.hijo_derecho = nodo_izquierdo.hijo_izquierdo
             return True
+    
+    def bucarpadre(self, elemento):
+        if not self.estaVacio():
+            return self.__buscarpadre(self.raiz, elemento)
+        return None
+    
+    def __buscarpadre(self, arbol:ArbolBinario, elemento): 
+        print("buscando.. \n ",elemento,"(",arbol.valor_nodo,arbol.hijo_izquierdo,arbol.hijo_derecho,")")
+
+        if elemento < arbol.valor_nodo:
+            if arbol.hijo_izquierdo is not None:
+                if arbol.hijo_izquierdo.valor_nodo == elemento:
+                    return arbol
+                else:
+                    return self.__buscarpadre(arbol.hijo_izquierdo, elemento)
+            else:
+                return None
+        else:
+            if arbol.hijo_derecho is not None:
+                if elemento == arbol.hijo_derecho.valor_nodo:
+                    return arbol
+                else:
+                    return self.__buscarpadre(arbol.hijo_derecho, elemento)
+            else:
+                return None
