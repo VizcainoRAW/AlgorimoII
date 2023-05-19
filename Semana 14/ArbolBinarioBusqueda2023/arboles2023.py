@@ -69,6 +69,63 @@ class ArbolBinario:
             visitados = self.__posOrden(arbol.hijo_derecho, visitados)
             visitados.append(arbol)
         return visitados
+    
+    def listarHojas(self):
+        lista_visitados= self.preOrden()
+        lista_hojas = self.__listarHojas(self, lista_visitados)
+        return lista_hojas
+    
+    def __listarHojas(self, arbol:"ArbolBinario", visitados:list):
+        if arbol is not None:
+            lista_hojas=list()
+            for i in visitados:
+                if i.hijo_izquierdo == None and i.hijo_derecho == None:
+                    lista_hojas.append(i)
+        return lista_hojas
+    
+    def contarNodos(self):
+        lista_nodos=self.preOrden()
+        numero_nodos=len(lista_nodos)
+        return numero_nodos
+    
+    def determinarAltura(self):
+         nodos=list()
+         lista_prfundidad=list()
+         self.__determinarAltura(self, lista_prfundidad,nodos)
+         return max(lista_prfundidad)
+    
+    def __determinarAltura(self, arbol:"ArbolBinario", profundida:list, nodos:list ,nivel = 0):
+        if arbol is not None:
+            nodos.append(arbol)
+            profundida.append(nivel)
+            nodos, profundidad= self.__determinarAltura(arbol.hijo_izquierdo, profundida,nodos, nivel +1)
+            nodos, profundidad= self.__determinarAltura(arbol.hijo_derecho, profundida,nodos, nivel +1)
+        return nodos , profundida
+    
+    def determinaNiveles(self):
+        nodos=list()
+        lista_prfundidad=list()
+        self.__determinarAltura(self, lista_prfundidad,nodos)
+        return nodos , "niveles de los nodos",lista_prfundidad
+
+    def determinarCompleto(self):
+         visitados=list()
+         visitados , completo =  self.__determinarcompleto(self,visitados,True)
+         if completo==True:
+            return True
+         if completo==False:
+             return False
+    
+    def __determinarcompleto(self, arbol:"ArbolBinario", visitados:list,completo:True):
+        if arbol is not None:
+            if arbol.hijo_izquierdo == None and arbol.hijo_derecho is not None:
+                completo=False
+            if arbol.hijo_izquierdo is not None and arbol.hijo_derecho == None: 
+                completo=False
+            visitados.append(arbol)
+            visitados, completo = self.__determinarcompleto(arbol.hijo_izquierdo, visitados,completo)                      
+            visitados, completo = self.__determinarcompleto(arbol.hijo_derecho, visitados,completo)       
+        return visitados, completo 
 
 #Clase Arbol Binario de Búsqueda (ABB)
 class ArbolBinarioBusqueda:
@@ -197,12 +254,12 @@ class ArbolBinarioBusqueda:
                 nodo_temporal.hijo_derecho = nodo_izquierdo.hijo_izquierdo
             return True
     
-    def bucarpadre(self, elemento):
+    def bucarPadre(self, elemento):
         if not self.estaVacio():
-            return self.__buscarpadre(self.raiz, elemento)
+            return self.__buscarPadre(self.raiz, elemento)
         return None
     
-    def __buscarpadre(self, arbol:ArbolBinario, elemento): 
+    def __buscarPadre(self, arbol:ArbolBinario, elemento): 
         print("buscando.. \n ",elemento,"(",arbol.valor_nodo,arbol.hijo_izquierdo,arbol.hijo_derecho,")")
 
         if elemento < arbol.valor_nodo:
@@ -210,7 +267,7 @@ class ArbolBinarioBusqueda:
                 if arbol.hijo_izquierdo.valor_nodo == elemento:
                     return arbol
                 else:
-                    return self.__buscarpadre(arbol.hijo_izquierdo, elemento)
+                    return self.__buscarPadre(arbol.hijo_izquierdo, elemento)
             else:
                 return None
         else:
@@ -218,6 +275,11 @@ class ArbolBinarioBusqueda:
                 if elemento == arbol.hijo_derecho.valor_nodo:
                     return arbol
                 else:
-                    return self.__buscarpadre(arbol.hijo_derecho, elemento)
+                    return self.__buscarPadre(arbol.hijo_derecho, elemento)
             else:
                 return None
+            
+    def maximaProfundidad(self):
+        return self.raiz.determinarAltura()
+    
+    
