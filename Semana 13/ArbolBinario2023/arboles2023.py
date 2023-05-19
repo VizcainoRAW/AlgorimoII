@@ -88,7 +88,7 @@ class ArbolBinario:
         numero_nodos=len(lista_nodos)
         return numero_nodos
     
-    def determinarAltura(self,altura=None):
+    def determinarAltura(self):
          nodos=list()
          lista_prfundidad=list()
          self.__determinarAltura(self, lista_prfundidad,nodos)
@@ -100,6 +100,33 @@ class ArbolBinario:
             profundida.append(nivel)
             nodos, profundidad= self.__determinarAltura(arbol.hijo_izquierdo, profundida,nodos, nivel +1)
             nodos, profundidad= self.__determinarAltura(arbol.hijo_derecho, profundida,nodos, nivel +1)
-        return nodos, profundida
+        return nodos , profundida
+    
+    def determinaNiveles(self):
+        nodos=list()
+        lista_prfundidad=list()
+        self.__determinarAltura(self, lista_prfundidad,nodos)
+        return nodos , "niveles de los nodos",lista_prfundidad
+
+    def determinarCompleto(self):
+         visitados=list()
+         visitados , completo =  self.__determinarcompleto(self,visitados,True)
+         if completo==True:
+            return True
+         if completo==False:
+             return False
+    
+    def __determinarcompleto(self, arbol:"ArbolBinario", visitados:list,completo:True):
+        if arbol is not None:
+            if arbol.hijo_izquierdo == None and arbol.hijo_derecho is not None:
+                completo=False
+            if arbol.hijo_izquierdo is not None and arbol.hijo_derecho == None: 
+                completo=False
+            visitados.append(arbol)
+            visitados, completo = self.__determinarcompleto(arbol.hijo_izquierdo, visitados,completo)                      
+            visitados, completo = self.__determinarcompleto(arbol.hijo_derecho, visitados,completo)       
+        return visitados, completo 
+    
+
     
     
