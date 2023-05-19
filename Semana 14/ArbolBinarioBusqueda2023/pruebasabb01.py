@@ -11,7 +11,10 @@ arbol01.insertar(41)
 arbol01.insertar(75)
 arbol01.insertar(85)
 arbol01.insertar(100)
+arbol01.insertar(50)
 
 print("Arbol: ",arbol01)
 print("padre: ",arbol01.bucarPadre(4))
 print("Arbol maxima profundidad: ",arbol01.maximaProfundidad())
+print("valor mas cercano por arriba: ",arbol01.valorMasCercanoArriba(50))
+

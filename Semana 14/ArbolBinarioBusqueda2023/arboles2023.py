@@ -260,8 +260,6 @@ class ArbolBinarioBusqueda:
         return None
     
     def __buscarPadre(self, arbol:ArbolBinario, elemento): 
-        print("buscando.. \n ",elemento,"(",arbol.valor_nodo,arbol.hijo_izquierdo,arbol.hijo_derecho,")")
-
         if elemento < arbol.valor_nodo:
             if arbol.hijo_izquierdo is not None:
                 if arbol.hijo_izquierdo.valor_nodo == elemento:
@@ -282,4 +280,30 @@ class ArbolBinarioBusqueda:
     def maximaProfundidad(self):
         return self.raiz.determinarAltura()
     
+    def valorMasCercanoArriba(self,elemento):
+        lista_nodos=list()
+        lista_nodos=self.raiz.preOrden()
+        return self.__valorMasCercanoArriba(lista_nodos,elemento)
     
+    def __valorMasCercanoArriba(self,lista_nodos:list,elemento):
+        lista_nodos= self.raiz.enOrden()
+        lista_diferencia=list()
+        for i in range(len(lista_nodos)-1):
+            diferencia=int(lista_nodos[i].valor_nodo)-elemento
+            if diferencia<=0:
+                diferencia=10*10**10
+            lista_diferencia.append(diferencia)
+        indice=0
+        diferencia_minima=lista_diferencia[0]
+        for i in range(len(lista_diferencia)-1):
+            if diferencia_minima>lista_diferencia[i]:
+                diferencia_minima=lista_diferencia[i]
+                indice=i
+        
+        return lista_nodos[indice]
+        
+
+
+        
+
+        
